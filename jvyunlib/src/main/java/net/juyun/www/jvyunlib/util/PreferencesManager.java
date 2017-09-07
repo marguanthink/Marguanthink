@@ -19,11 +19,9 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 /**
- * [PreferencesManager管理类，提供get和put方法来重写SharedPreferences所提供的方法，更为实用和便捷]
+ * 管理类，提供get和put方法来重写SharedPreferences所提供的方法，更为实用和便捷]
  * 
- * @author huxinwu
- * @version 1.0
- * @date 2014-3-5
+
  * 
  **/
 @SuppressLint({ "SdCardPath", "DefaultLocale" })
@@ -54,8 +52,7 @@ public class PreferencesManager {
 	/**
 	 * 构造方法
 	 * 
-	 * @param context
-	 * @param shareName
+
 	 */
 	private PreferencesManager(Context context, String shareName) {
 		mContext = context;
@@ -66,9 +63,9 @@ public class PreferencesManager {
 	/**
 	 * 得到单例模式的PreferencesManager对象
 	 * 
-	 * @param context
+
 	 *            上下文
-	 * @return
+
 	 */
 	public static PreferencesManager getInstance(Context context) {
 		return getInstance(context, shareName);
@@ -77,11 +74,7 @@ public class PreferencesManager {
 	/**
 	 * 得到单例模式的PreferencesManager对象
 	 * 
-	 * @param context
-	 *            上下文
-	 * @param shareName
-	 *            文件名称
-	 * @return
+
 	 */
 	public static PreferencesManager getInstance(Context context,
 			String shareName) {
@@ -147,7 +140,7 @@ public class PreferencesManager {
 	/**
 	 * 直接存放对象，反射将根据对象的属性作为key，并将对应的值保存。
 	 * 
-	 * @param t
+
 	 */
 	@SuppressWarnings("rawtypes")
 	public <T> void put(T t) {
@@ -223,8 +216,7 @@ public class PreferencesManager {
 	/**
 	 * 获取整个对象，跟put(T t)对应使用， 利用反射得到对象的属性，然后从preferences获取
 	 * 
-	 * @param cls
-	 * @return
+
 	 */
 	public <T> Object get(Class<T> cls) {
 		Object obj = null;

@@ -10,7 +10,6 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Util {
     /**
      *
-     * @returnMD5加密后市返回一个32位数的字符串，返回“”，代表加密异常
      */
     public static String md5Code(String psd) {
         try {

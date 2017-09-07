@@ -22,27 +22,8 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
- * Created by DuanLu on 2016/11/15 11:46.
- *
- * @author DuanLu
- * @version 1.0.0
- * @class GlideImageManager
- * @describe Glide图片加载管理类
- * 可能遇到的问题:
- * 1、placeholder()导致的图片变形问题。
- * 问题描述：使用.placeholder()方法在某些情况下会导致图片显示的时候出现图片变形的情况。这是因为Glide默认开启的crossFade动画导致的TransitionDrawable绘制异常，详细描述和讨论可以看一下这个#363 issue。根本原因就是你的placeholder图片和你要加载显示的图片宽高比不一样，而Android的TransitionDrawable无法很好地处理不同宽高比的过渡问题，这的确是个Bug，是Android的也是Glide的。
- * 解决办法：使用.dontAnimate()方法禁用过渡动画，或者使用animate()方法自己写动画，再或者自己修复TransitionDrawable的问题。
- * 1、ImageView的资源回收问题。
- * 问题描述：默认情况下，Glide会根据with()使用的Activity或Fragment的生命周期自动调整资源请求以及资源回收。但是如果有很占内存的Fragment或Activity不销毁而仅仅是隐藏视图，那么这些图片资源就没办法及时回收，即使是GC的时候。
- * 解决办法：可以考虑使用WeakReference，如：
- * final WeakReference<ImageView> imageViewWeakReference = new WeakReference<>(imageView);
- * ImageView target = imageViewWeakReference.get();
- * if (target != null) {
- * Glide.with(context).load(uri).into(target);
- * }
- * 3、ImageView的setTag问题。
- * 问题描述：如果使用Glide的into(imageView)为ImageView设置图片的同时使用ImageView的setTag(final Object tag)方法，将会导致java.lang.IllegalArgumentException: You must not call setTag() on a view Glide is targeting异常。因为Glide的ViewTarget中通过view.setTag(tag)和view.getTag()标记请求的，由于Android 4.0之前Tag存储在静态map里，如果Glide使用setTag(int key, final Object tag)方法标记请求会导致内存泄露，所以Glide默认使用view.setTag(tag)标记请求，你就不能重复调用了。
- * 解决办法：如果你需要为ImageView设置Tag，必须使用setTag(int key, final Object tag)及getTag(int key)方法，其中key必须是合法的资源ID以确保key的唯一性，典型做法就是在资源文件中声明type="id"的item资源。
+
+
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class GlideImageManager extends BaseUtils {
@@ -55,8 +36,8 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 加载图片
      *
-     * @param url
-     * @param iv
+
+
      */
     public static void loadImage(String url, ImageView iv) {
         Glide.with(iv.getContext()).load(url)
@@ -71,9 +52,7 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 加载设置优先级的图片
      *
-     * @param url
-     * @param iv
-     * @param priority
+
      */
     public static void loadImage(String url, ImageView iv, Priority priority) {
         Glide.with(iv.getContext()).load(url)
@@ -88,10 +67,7 @@ public class GlideImageManager extends BaseUtils {
      * 加载图片
      *
 
-     * @param url
-     * @param defaultImg
-     * @param errImg
-     * @param iv
+
      */
     public static void loadImage(String url, @DrawableRes int defaultImg, @DrawableRes int errImg, ImageView iv) {
         loadImage( url, errImg, defaultImg, iv, Priority.NORMAL, DiskCacheStrategy.RESULT);
@@ -101,12 +77,10 @@ public class GlideImageManager extends BaseUtils {
      * 加载设置优先级的图片
      *
 
-     * @param url
-     * @param errImg
-     * @param defaultImg
-     * @param iv
-     * @param priority          优先级：Priority.IMMEDIATE，Priority.HIGH，Priority.NORMAL(默认)，Priority.LOW
-     * @param diskCacheStrategy 缓存策略：DiskCacheStrategy.SOURCE：缓存原始数据，DiskCacheStrategy.RESULT：缓存变换(如缩放、裁剪等)后的资源数据(默认)，DiskCacheStrategy.NONE：什么都不缓存，DiskCacheStrategy.ALL：缓存SOURC和RESULT
+
+
+     *        优先级：Priority.IMMEDIATE，Priority.HIGH，Priority.NORMAL(默认)，Priority.LOW
+     * 缓存策略：DiskCacheStrategy.SOURCE：缓存原始数据，DiskCacheStrategy.RESULT：缓存变换(如缩放、裁剪等)后的资源数据(默认)，DiskCacheStrategy.NONE：什么都不缓存，DiskCacheStrategy.ALL：缓存SOURC和RESULT
      */
     public static void loadImage(String url, @DrawableRes int errImg, @DrawableRes int defaultImg, ImageView iv, Priority priority, DiskCacheStrategy diskCacheStrategy) {
         Glide.with(iv.getContext()).load(url).diskCacheStrategy(diskCacheStrategy).priority(priority).placeholder(defaultImg).error(errImg).into(iv);
@@ -115,8 +89,8 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 加载gif图片(缓存原始数据)
      *
-     * @param url
-     * @param iv      diskCacheStrategy设置缓存策略:
+     *
+     *      diskCacheStrategy设置缓存策略:
      */
     public static void loadGifImage(String url, ImageView iv) {
         Glide.with(iv.getContext()).load(url).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(default_img).into(iv);
@@ -125,8 +99,8 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 加载圆形图片
      *
-     * @param url
-     * @param iv
+     *
+     *
      */
     public static void loadCircleImage(String url, ImageView iv) {
 //        Glide.with(iv.getContext())
@@ -146,8 +120,8 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 加载圆形资源图片
      *
-     * @param resourceId
-     * @param iv
+     *
+     *
      */
     public static void loadCircleImage(@DrawableRes int resourceId, ImageView iv) {
         Glide.with(iv.getContext())
@@ -163,9 +137,9 @@ public class GlideImageManager extends BaseUtils {
      * 加载圆角图片
      *
 
-     * @param url
-     * @param iv
-     * @param radius
+     *
+     *
+     *
      */
     public static void loadRoundCornerImage(String url, ImageView iv, int radius) {
         Glide.with(iv.getContext()).load(url).placeholder(default_img).error(default_err_img).transform(new GlideRoundTramsform(iv.getContext(), radius)).into(iv);
@@ -174,9 +148,9 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 加载圆角资源图片
      *
-     * @param resourceId
-     * @param iv
-     * @param radius
+     *
+     *
+     *
      */
     @Deprecated
     public static void loadRoundCornerImageDp(@DrawableRes int resourceId, ImageView iv, int radius) {
@@ -199,8 +173,7 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 加载File类型图片
      *
-     * @param file
-     * @param iv
+
      */
     public static void loadImage(File file, ImageView iv) {
         Glide.with(iv.getContext()).load(file).into(iv);
@@ -209,8 +182,7 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 加载资源图片
      *
-     * @param resourceId
-     * @param iv
+
      */
     public static void loadImage(@DrawableRes int resourceId, ImageView iv) {
         Glide.with(iv.getContext()).load(resourceId).into(iv);
@@ -219,7 +191,7 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 清除内存缓存
      *
-     * @param context
+
      */
     public static void clearMemory(Context context) {
         Glide.get(context).clearMemory();
@@ -228,7 +200,7 @@ public class GlideImageManager extends BaseUtils {
     /**
      * 清除磁盘缓存
      *
-     * @param applicationContext
+
      */
     public static void clearDiskCache(Context applicationContext) {
         // 必须在后台线程中调用，建议同时clearMemory()
