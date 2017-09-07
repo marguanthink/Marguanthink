@@ -1,10 +1,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
     package="net.juyun.www.jvyunlib">
-<uses-permission android:name="android.permission.INTERNET"/>
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:supportsRtl="true">
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--android:theme="@style/AppTheme"-->
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+        <activity android:name=".imagePager.BigImagePagerActivity" />
+        <activity
+            android:name=".photolib.PhotoPagerActivity"
+            android:theme="@style/AppTheme.NoActionBarPhoto" />
+        <activity
+            android:name=".photolib.PhotoPickerActivity"
+            android:theme="@style/AppTheme.NoActionBarPhoto" />
     </application>
 
 </manifest>
