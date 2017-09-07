@@ -35,7 +35,7 @@ publish {
     userOrg = 'marguanthink'//bintray.com用户名
     groupId = 'jvyunlib'//jcenter上的路径
     artifactId = 'jvyunlib'//项目名称
-    publishVersion = '1.0.0'//版本号
+    publishVersion = '1.0.1'//版本号
     desc = 'this is for test'//描述，不重要
-    website = 'https://github.com/marguanthink/'//网站，最好有，不重要
+    website = 'https://github.com/marguanthink/Marguanthink'//网站，最好有，不重要
 }
