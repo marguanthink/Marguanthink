@@ -33,7 +33,7 @@ dependencies {
 //gradlew clean build bintrayUpload -PbintrayUser=marguanthink -PbintrayKey=8367189b3403f4aacea031b8b8de99441620f341 -PdryRun=false
 publish {
     userOrg = 'marguanthink'//bintray.com用户名
-    groupId = 'jvyunlib'//jcenter上的路径
+    groupId = 'jvyun'//jcenter上的路径
     artifactId = 'jvyunlib'//项目名称
     publishVersion = '1.0.0'//版本号
     desc = 'this is for test'//描述，不重要
